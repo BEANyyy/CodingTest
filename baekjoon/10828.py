@@ -1,3 +1,5 @@
+#스택
+
 import sys
 
 n = int(sys.stdin.readline()) #input은 시간초과라서 sys 활용
