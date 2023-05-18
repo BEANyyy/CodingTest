@@ -1,18 +1,40 @@
-#n 입력받기
-n = int(input())
+#n, m, v
+n, m, v = map(int, input().split())  #자료형 정수로
 
-#666숫자 정의
-#어쨌든 666이 들어가는 수 중에 가장 작은 수부터 세면 됨
+#그래프 구성 : 딕셔너리로 인접노드 표현
+g = {i: [] for i in range(1, n+1)}
+for i in range(m):
+    key, value = map(int, input().split())
+    g[key].append(value)
+    g[value].append(key)
 
-num = 0
-arr = []
-for i in range(2666800):
-    if len(arr) == 10000:
-        #print(i)     #어디까지 넣어야 n이 10000이 되는지 궁금해서 해봄.
-        break
-    else:
-        if '666' in str(num):
-          arr.append(num)
-    num+=1
+for key, value in g.items():
+    g[key] = sorted(value)
 
-print(arr[n-1])
+
+def DFS(g, s, vstd=None):
+    if vstd is None:
+        vstd = []
+    if s in vstd:
+        return vstd
+    vstd.append(s)
+    for u in g[s]:
+        vstd = DFS(g, u, vstd)
+    return vstd
+
+#bfs
+from collections import deque
+
+def BFS(g, s):
+    vstd = []
+    q = deque([s])
+
+    while q:
+        u = q.popleft()
+        if u not in vstd:
+            vstd.append(u)
+            q.extend(g[u])
+    return vstd
+
+print(' '.join(list(map(str, DFS(g, v)))))
+print(' '.join(list(map(str, BFS(g, v)))))
