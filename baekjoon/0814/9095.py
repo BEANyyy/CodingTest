@@ -1,24 +1,30 @@
-# 듣보잡
+# 1, 2, 3 더하기
+
+# n(1) = 1
+# n(2) = 2
+# n(3) = 4
+# n(4) = 7
+# n(5) = 13
+# .
+# .
+# .
+
+# = 피보나치랑 유사한데, 얘는 3개씩 더함.
 
 
-n, m = map(int, input().split())
+n = int(input())
 
-lis = [0] * n
-see = [0] * m
+arr = [0] * 11
+arr[1] = 1
+arr[2] = 2
+arr[3] = 4
 
-for i in range(n):
-    lis[i] = input()
+# 1부터 10까지 수열에 맞는 값 입력하기
+for i in range(4, 11):
+    arr[i] = arr[i-1] + arr[i-2] + arr[i-3]
 
+# 정수 n 입력받고 출력
+for j in range(n):
+    num = int(input())
+    print(arr[num])
 
-for j in range(m):
-    see[j] = input()
-
-lis_see = list(set(lis) & set(see))
-lis_see.sort()  # 사전순 정렬
-
-print(len(lis_see))
-
-for k in range(len(lis_see)):
-    print(lis_see[k])
-
-    
